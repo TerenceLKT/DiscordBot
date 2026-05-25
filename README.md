@@ -17,11 +17,19 @@ To prevent bot from being invited to other servers ,
 - If a command can only be accessed by owner/administrator/moderator,
 ... replace [@ownerOnly/@adminOnly/@moderatorOnly] with [@ownerOnly/@adminOnly/@moderatorOnly] below the #COMMAND section
 if command can be used by everyone, delete it completely
+
 COMMANDS
-- CONVERSION
-/editrate [type] [rate] -- ownerOnly
-/gp [robux], /gf [robux], /igg [robux] -- anyone
-- CREDITS
-/credit [add|remove] [user] [amount] -- adminOnly
-/log [user] [amount] -- adminOnly
-/cbalance [user] --anyone
+
+CONVERSION
+
+- /editrate [type] [rate] -- ownerOnly
+
+- /gp [robux], /gf [robux], /igg [robux] -- anyone
+
+CREDITS
+
+- /credit [add|remove] [user] [amount] -- adminOnly
+
+- /log [user] [amount] -- adminOnly
+
+- /cbalance [user] --anyone
