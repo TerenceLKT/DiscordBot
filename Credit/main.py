@@ -1,5 +1,5 @@
 import discord
-import sqlite3
+import psycopg2
 import os
 
 from dotenv import load_dotenv
@@ -41,7 +41,9 @@ intents.message_content = True
 client = Client()
 
 #DATABASE CREATION
-db = sqlite3.connect("database.db", check_same_thread = False)
+db = psycopg2.connect(
+    os.getenv("DATABASE_URL")
+)
 cursor = db.cursor()
 
 cursor.execute("""
@@ -78,7 +80,7 @@ def validateUser(user: discord.Member):
 
     cursor.execute("""
     INSERT INTO users (user_id, username)
-    VALUES (?, ?)
+    VALUES (%s, %s)
     ON CONFLICT(user_id)
     DO UPDATE SET username = excluded.username
     """, (str(user.id), user.name))
@@ -100,8 +102,8 @@ async def logSpending(interaction: discord.Interaction, user: discord.Member, am
 
     cursor.execute("""
     UPDATE users
-    SET total_spending = total_spending + ?
-    WHERE user_id = ?
+    SET total_spending = total_spending + %s
+    WHERE user_id = %s
     """, (amount, str(user.id)))
 
     db.commit()
@@ -109,7 +111,7 @@ async def logSpending(interaction: discord.Interaction, user: discord.Member, am
     cursor.execute("""
     SELECT total_spending
     FROM users
-    WHERE user_id = ?
+    WHERE user_id = %s
     """, (str(user.id),))
 
     total = cursor.fetchone()[0]
@@ -137,8 +139,8 @@ async def manageCredits(interaction: discord.Interaction, action: ActionType, us
 
         cursor.execute("""
         UPDATE users
-        SET wallet = wallet + ?
-        WHERE user_id = ?
+        SET wallet = wallet + %s
+        WHERE user_id = %s
         """, (amount, str(user.id)))
 
     else:
@@ -146,7 +148,7 @@ async def manageCredits(interaction: discord.Interaction, action: ActionType, us
         cursor.execute("""
         SELECT wallet
         FROM users
-        WHERE user_id = ?
+        WHERE user_id = %s
         """, (str(user.id),))
 
         current = cursor.fetchone()[0]
@@ -159,8 +161,8 @@ async def manageCredits(interaction: discord.Interaction, action: ActionType, us
 
         cursor.execute("""
         UPDATE users
-        SET wallet = wallet - ?
-        WHERE user_id = ?
+        SET wallet = wallet - %s
+        WHERE user_id = %s
         """, (amount, str(user.id)))
 
     db.commit()
@@ -168,7 +170,7 @@ async def manageCredits(interaction: discord.Interaction, action: ActionType, us
     cursor.execute("""
     SELECT wallet
     FROM users
-    WHERE user_id = ?
+    WHERE user_id = %s
     """, (str(user.id),))
 
     wallet = cursor.fetchone()[0]
@@ -197,7 +199,7 @@ async def balance(interaction: discord.Interaction, user: discord.Member = None)
     cursor.execute("""
     SELECT wallet
     FROM users
-    WHERE user_id = ?
+    WHERE user_id = %s
     """, (str(user.id),))
 
     wallet = cursor.fetchone()[0]
