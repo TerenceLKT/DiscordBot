@@ -1,5 +1,5 @@
 import discord
-import sqlite3
+import psycopg2
 import os
 
 from dotenv import load_dotenv
@@ -41,7 +41,9 @@ intents.message_content = True
 client = Client()
 
 #DATABASE CREATION
-db = sqlite3.connect("database.db", check_same_thread = False)
+db = psycopg2.connect(
+    os.getenv("DATABASE_URL")
+)
 cursor = db.cursor()
 
 cursor.execute("""
@@ -94,7 +96,7 @@ def getRate(rateType: str):
     cursor.execute("""
     SELECT value
     FROM rates
-    WHERE key = ?
+    WHERE key = %s
     """, (rateType,))
 
     result = cursor.fetchone()
@@ -135,7 +137,7 @@ async def editRate(interaction: discord.Interaction, type: RobuxType, rate: floa
 
     cursor.execute("""
     INSERT OR REPLACE INTO rates (key, value)
-    VALUES (?, ?)
+    VALUES (%s, %s)
     """, (key, str(rate)))
 
     db.commit()
