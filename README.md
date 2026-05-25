@@ -15,10 +15,15 @@ SETTINGS/SPECIFICATIONS
   To prevent bot from being invited to other servers , simply make sure public bot is turned off in the bot settings page 
 - If a command can only be accessed by owner/administrator/moderator, replace [@ownerOnly/@adminOnly/@moderatorOnly] with [@ownerOnly/@adminOnly/@moderatorOnly] below the #COMMAND section.
 If command can be used by everyone, delete it completely
-- Example:
+
+Example:
+
 (Convert.py line130-132)
+
 @client.tree.command(name = "editrate", description = "Set conversion rate", guild = GUILD_ID)
-@ownerOnly()   <--- replace w/ @adminOnly if users with admin and above can use it
+
+@ownerOnly()       _**<--- replace w/ @adminOnly if users with admin and above can use it**_
+
 async def editRate(interaction: discord.Interaction, type: RobuxType, rate: float):
 
 COMMANDS W/ DEFAULT PERMISSION
