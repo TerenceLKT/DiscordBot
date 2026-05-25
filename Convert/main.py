@@ -42,7 +42,8 @@ client = Client()
 
 #DATABASE CREATION
 db = psycopg2.connect(
-    os.getenv("DATABASE_URL")
+    os.getenv("DATABASE_URL"),
+    sslmode="require"
 )
 cursor = db.cursor()
 
