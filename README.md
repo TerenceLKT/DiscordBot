@@ -2,14 +2,6 @@
 
 README!!
 
-SETTING UP
-- Enter your BOT TOKEN
-eg: CONVERT_TOKEN = "AbC12345......"
-- Enter SERVER ID
-eg: SERVER_ID = 12345......
-- Enter BOT OWNER ID (your user id)
-eg: OWNER_ID = 12345...
-
 SETTINGS/SPECIFICATIONS
 - Database is global, meaning its shared among servers (if the bot is invited to other servers). 
   To prevent bot from being invited to other servers , simply make sure public bot is turned off in the bot settings page 
