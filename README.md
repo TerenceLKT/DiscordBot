@@ -24,7 +24,7 @@ CONVERSION
 
 - /editrate [type] [rate] -- ownerOnly
 
-- /gp [robux], /gf [robux], /igg [robux] -- anyone
+- /gp [amount], /gf [amount], /igg [amount] -- anyone
 
 CREDITS
 
