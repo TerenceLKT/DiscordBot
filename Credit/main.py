@@ -138,9 +138,9 @@ async def editSpending(interaction: discord.Interaction, user: discord.Member, a
 
     cursor.execute("""
     UPDATE users
-    SET total_spending = amount
+    SET total_spending = %s
     WHERE user_id = %s
-    """, (str(user.id)))
+    """, (amount, str(user.id)))
 
     db.commit()
 
