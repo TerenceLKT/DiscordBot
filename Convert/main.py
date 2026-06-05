@@ -171,8 +171,7 @@ async def gf(interaction: discord.Interaction, amount: str):
         return
     
     await interaction.response.send_message(
-        embed = convertResult(value, myr, type), 
-        ephemeral = True
+        embed = convertResult(value, myr, type)
         )
 
 @client.tree.command(name="gp", description = "Gamepass Conversion", guild = GUILD_ID)
