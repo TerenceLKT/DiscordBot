@@ -185,8 +185,7 @@ async def gp(interaction: discord.Interaction, amount: str):
         return
 
     await interaction.response.send_message(
-        embed = convertResult(value, myr, type),
-        ephemeral = True
+        embed = convertResult(value, myr, type)
         )
 
 @client.tree.command(name="igg", description = "In-Game Gifting Conversion", guild = GUILD_ID)
@@ -200,8 +199,8 @@ async def igg(interaction: discord.Interaction, amount: str):
         return
 
     await interaction.response.send_message(
-        embed = convertResult(value, myr, type),
-        ephemeral = True)
+        embed = convertResult(value, myr, type)
+        )
     
 #PERMISSION ERROR HANDLING
 @client.tree.error
